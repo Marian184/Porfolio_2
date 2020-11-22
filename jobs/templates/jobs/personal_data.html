@@ -72,7 +72,7 @@
   <div class="collapse navbar-collapse " id="navbarNav">
     <ul class="navbar-nav ml-auto">
 <!--      añadimos el ml-auto para tirar el texto a la derecha-->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
@@ -92,39 +92,43 @@
 
 <main role="main">
 
-  <section class="jumbotron text-center">
-    <div class="container">
-      <h1>Hi I'm Mariano here you can find my work experience</h1>
-            <img src= "{% static 'foto-carnet.jpg' %}" height="200px" />
-        <br/>
-       <p>
-<!--         Añadimos el mail para que se envide al tocar el boton mas dos scrip de arriba <script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/bootstrap.min.js"></script>-->
-        <a href="mailto:m.fragueiro.lazcano@gmail.com " class="btn btn-primary my-2">Mail contact</a>
+<!--  <section class="jumbotron text-center">-->
+<!--    <div class="container">-->
+<!--      <h1>Here you can see the experience in</h1>-->
+<!--            <img src= "{% static 'foto-carnet.jpg' %}" height="200px" />-->
+<!--        <br/>-->
+<!--       <p>-->
+<!--&lt;!&ndash;         Añadimos el mail para que se envide al tocar el boton mas dos scrip de arriba <script src="js/jquery-3.5.1.min.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>&ndash;&gt;-->
+<!--        <a href="mailto:m.fragueiro.lazcano@gmail.com " class="btn btn-primary my-2">Mail contact</a>-->
 
-      </p>
-    </div>
-  </section>
+<!--      </p>-->
+<!--    </div>-->
+<!--  </section>-->
 <div class="album py-5 bg-light text-center">
-    <h1>Work Experience</h1>
+    <h1>{{ jobd.company }}</h1>
     <br/>
     <div class="container">
+       <br/>
+        <img src="{{ jobd.image.url}} " width="150px" class="img-responsive center-block d-block mx-auto" >
+        <p>Start date: {{ jobd.job_date_start }} --
+        {% if jobd.job_date_end != null %}
+            End date {{jobd.job_date_end}}
+            {% else %}
+            Currently
+        {% endif%}
 
-      <div class="row">
-          {% for job in jobs %}
-        <div class="col-md-4">
-          <div class="card mb-4 shadow-sm">
-            <img src="{{ job.image.url}} " width="250px" class="img-responsive center-block d-block mx-auto" >
-            <div class="card-body" style="text-align: center">
-                <a href="{% url 'jobdetail' job.id %}" class="card-text">{{ job.company }}</a>
-            </div>
-          </div>
-        </div>
+        <p/>
+        <p>Responsibilities:</p>
+        <p> Position: {{ jobd.position }} <p/>
 
-        {% endfor %}
+        {% if jobd.technologies == "$0" %}
+            <p>Technologies:</p>
+            <p> {{jobd.technologies}}</p>
+        {% endif%}
 
 
-    </div>
+
   </div>
 
 </main>
@@ -132,7 +136,7 @@
 <!--    Aca se añade la parte de copyright y eso ©-->
 <footer class="text-muted">
   <div class="container text-center">
-    <p>© Mariano Fragueiro Lazcano {% now "Y" %}</p>
+    <p>© Mariano Fragueiro Lazcano{% now "Y" %}</p>
   </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
