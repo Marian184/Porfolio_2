@@ -7,9 +7,10 @@ class Job(models.Model):
     company = models.CharField(max_length=200, default="")
     str_job_date = models.DateTimeField(null=True, blank=True)
     end_job_date = models.DateTimeField(null=True, blank=True)
-    technologies = models.TextField(default="", blank=True)
     position = models.CharField(max_length=200, default="")
     responsibilities = models.TextField(default="", blank=True)
+    technologies = models.TextField(default="", blank=True)
+
 
     def __str__(self):
         return self.company
